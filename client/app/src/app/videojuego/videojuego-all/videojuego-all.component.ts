@@ -1,12 +1,16 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
+import {
+  MatTable,
+  MatTableDataSource,
+  _MatTableDataSource,
+} from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import {
   VideojuegoAllDataSource,
   VideojuegoAllItem,
 } from './videojuego-all-datasource';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GenericService } from 'src/app/share/generic.service';
 
@@ -30,14 +34,25 @@ export class VideojuegoAllComponent implements AfterViewInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private ngService: GenericService
-  ) {
-    this.dataSource = new VideojuegoAllDataSource();
-  }
+    private gServices: GenericService
+  ) {}
 
   ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
+    this.listVideoJuegos();
+  }
+  listVideoJuegos() {
+    this.gServices
+      .list('videojuego')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((dato) => {
+        this.datos = dato;
+        this.dataSource = new _MatTableDataSource(this.datos);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      });
+  }
+  gOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 }

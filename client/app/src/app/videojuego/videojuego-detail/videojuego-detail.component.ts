@@ -18,7 +18,7 @@ export class VideojuegoDetailComponent {
       console.log(data);
         this.datos=data; 
     });
-   
+  
   }
   ngOnDestroy() {
     this.destroy$.next(true);
