@@ -51,6 +51,13 @@ export class VideojuegoAllComponent implements AfterViewInit {
         this.dataSource.paginator = this.paginator;
       });
   }
+
+  detalle(id: number) {
+    this.router.navigate(['/videojuego', id], {
+      relativeTo: this.route,
+    });
+  }
+
   gOnDestroy() {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();

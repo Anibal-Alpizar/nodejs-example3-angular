@@ -21,5 +21,7 @@ export class VideojuegoIndexComponent {
         this.datos = dato;
       });
   }
-  detailVideojuego(id: number) {}
+  detailVideojuego(id: number) {
+
+  }
 }
