@@ -10,13 +10,13 @@ import { HomeModule } from './home/home.module';
 import { UserModule } from './user/user.module';
 import { VideojuegoModule } from './videojuego/videojuego.module';
 import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     //Modulos de la aplicación
@@ -26,12 +26,11 @@ import { ToastrModule } from 'ngx-toastr';
     HomeModule,
     UserModule,
     VideojuegoModule,
-    
+
     //Siempre de último
-    AppRoutingModule   
-   
+    AppRoutingModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -10,7 +10,9 @@ import { GenericService } from 'src/app/share/generic.service';
 export class VideojuegoIndexComponent {
   datos: any;
   destroy$: Subject<boolean> = new Subject<boolean>();
-  constructor(private gServices: GenericService) {}
+  constructor(private gServices: GenericService) {
+    this.listVideoJuegos();
+  }
   listVideoJuegos() {
     this.gServices
       .list('videojuego')
@@ -19,4 +21,5 @@ export class VideojuegoIndexComponent {
         this.datos = dato;
       });
   }
+  detailVideojuego(id: number) {}
 }
